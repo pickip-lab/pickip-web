@@ -16,6 +16,13 @@
 .route-status { min-height: 100dvh; display: grid; align-content: center; justify-items: center; gap: 16px; text-align: center; padding: 24px; }
 .route-status p { margin: 0; }
 .form-error { margin-top: 14px !important; color: #9a3c57 !important; font-size: 12px !important; line-height: 1.5; }
+.link-button { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+.connection-links { display: grid; gap: 4px; margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
+.connection-links button { border: 0; background: transparent; padding: 7px 0; text-align: left; color: var(--ink); font-size: 11px; display: flex; justify-content: space-between; gap: 8px; }
+.connection-links span { color: var(--lavender-ink); white-space: nowrap; }
+.custom-rule-row a { margin-right: 12px; color: var(--lavender-ink); text-decoration: none; }
+.preset-card .preset-edit { margin-left: auto; color: var(--lavender-ink); font-size: 10px; white-space: nowrap; text-decoration: none; }
+.preset-card .preset-edit + button { margin-left: 0; }
 .auth-result { text-align: center; max-width: 520px; }
 .profile-card .secondary { margin-top: 30px; }
 * { box-sizing: border-box; }

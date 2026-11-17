@@ -5,6 +5,11 @@ import { AuthCallbackPage } from '../pages/auth/AuthCallbackPage'
 import { StartPage } from '../pages/start/StartPage'
 import { WelcomePage } from '../pages/welcome/WelcomePage'
 import { ProfilePage } from '../pages/profile/ProfilePage'
+import { ConnectionsPage } from '../pages/connections/ConnectionsPage'
+import { ConnectionDetailPage } from '../pages/connections/ConnectionDetailPage'
+import { ConnectionCallbackPage } from '../pages/connections/ConnectionCallbackPage'
+import { RulesPage } from '../pages/rules/RulesPage'
+import { RuleEditorPage } from '../pages/rules/RuleEditorPage'
 import { AppShell } from './AppShell'
 import { RequireAuth } from './RequireAuth'
 
@@ -25,8 +30,12 @@ export function App() {
       <Route path="/welcome" element={<WelcomePage />} />
       <Route element={<AppShell />}>
         <Route path="/inbox" element={<FeaturePlaceholder title="보관함" />} />
-        <Route path="/connections" element={<FeaturePlaceholder title="플랫폼 연결" />} />
-        <Route path="/rules" element={<FeaturePlaceholder title="수집 규칙" />} />
+        <Route path="/connections" element={<ConnectionsPage />} />
+        <Route path="/connections/callback" element={<ConnectionCallbackPage />} />
+        <Route path="/connections/:id" element={<ConnectionDetailPage />} />
+        <Route path="/rules" element={<RulesPage />} />
+        <Route path="/rules/new" element={<RuleEditorPage />} />
+        <Route path="/rules/:ruleId/edit" element={<RuleEditorPage />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Route>
     </Route>
