@@ -10,12 +10,11 @@ import { ConnectionDetailPage } from '../pages/connections/ConnectionDetailPage'
 import { ConnectionCallbackPage } from '../pages/connections/ConnectionCallbackPage'
 import { RulesPage } from '../pages/rules/RulesPage'
 import { RuleEditorPage } from '../pages/rules/RuleEditorPage'
+import { InboxPage } from '../pages/inbox/InboxPage'
+import { MessagePage } from '../pages/inbox/MessagePage'
+import { CategoryEditorPage } from '../pages/inbox/CategoryEditorPage'
 import { AppShell } from './AppShell'
 import { RequireAuth } from './RequireAuth'
-
-function FeaturePlaceholder({ title }: { title: string }) {
-  return <><div className="page-head"><div className="copy"><p className="eyebrow">PICKIP</p><h1 className="title">{title}</h1></div></div><div className="card empty-card"><p>화면을 준비하고 있습니다.</p></div></>
-}
 
 export function App() {
   const location = useLocation()
@@ -29,7 +28,9 @@ export function App() {
     <Route element={<RequireAuth />}>
       <Route path="/welcome" element={<WelcomePage />} />
       <Route element={<AppShell />}>
-        <Route path="/inbox" element={<FeaturePlaceholder title="보관함" />} />
+        <Route path="/inbox" element={<InboxPage />} />
+        <Route path="/messages/:id" element={<MessagePage />} />
+        <Route path="/messages/:id/categories" element={<CategoryEditorPage />} />
         <Route path="/connections" element={<ConnectionsPage />} />
         <Route path="/connections/callback" element={<ConnectionCallbackPage />} />
         <Route path="/connections/:id" element={<ConnectionDetailPage />} />

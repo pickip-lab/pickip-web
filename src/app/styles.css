@@ -23,6 +23,9 @@
 .custom-rule-row a { margin-right: 12px; color: var(--lavender-ink); text-decoration: none; }
 .preset-card .preset-edit { margin-left: auto; color: var(--lavender-ink); font-size: 10px; white-space: nowrap; text-decoration: none; }
 .preset-card .preset-edit + button { margin-left: 0; }
+.load-more { padding: 16px; text-align: center; }
+.reading .detail-card-body { padding: 0; }
+.reading-actions .danger-text { margin-left: auto; }
 .auth-result { text-align: center; max-width: 520px; }
 .profile-card .secondary { margin-top: 30px; }
 * { box-sizing: border-box; }
