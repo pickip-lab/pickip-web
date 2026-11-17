@@ -7,6 +7,7 @@ export function ConnectionCallbackPage() {
   const queryClient = useQueryClient()
   const params = new URLSearchParams(window.location.search)
   const id = params.get('connectionId')
+  const denied = params.get('error') === 'authorization_denied'
   const valid = id !== null && /^\d+$/.test(id)
 
   useEffect(() => {
@@ -16,5 +17,5 @@ export function ConnectionCallbackPage() {
     }
   }, [id, valid, navigate, queryClient])
 
-  return <div className="route-status" role="status"><h1>{valid ? '연결을 확인하고 있어요' : '연결 결과를 확인하지 못했어요'}</h1><Link to="/connections">플랫폼 연결로 돌아가기</Link></div>
+  return <div className="route-status" role={denied ? 'alert' : 'status'}><h1>{denied ? '플랫폼 연결을 취소했어요' : valid ? '연결을 확인하고 있어요' : '연결 결과를 확인하지 못했어요'}</h1><p>{denied ? '언제든 다시 연결할 수 있어요.' : !valid ? '연결을 다시 시작해 주세요.' : '잠시만 기다려 주세요.'}</p><Link className="primary" to="/connections">플랫폼 연결로 돌아가기</Link></div>
 }

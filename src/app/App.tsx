@@ -15,12 +15,16 @@ import { MessagePage } from '../pages/inbox/MessagePage'
 import { CategoryEditorPage } from '../pages/inbox/CategoryEditorPage'
 import { AppShell } from './AppShell'
 import { RequireAuth } from './RequireAuth'
+import { queryClient } from './queryClient'
 
 export function App() {
   const location = useLocation()
   useEffect(() => {
     if (location.pathname !== '/auth/callback') void authSession.restore()
   }, [location.pathname])
+  useEffect(() => authSession.subscribe(() => {
+    if (authSession.getSnapshot().status === 'anonymous') queryClient.clear()
+  }), [])
 
   return <Routes>
     <Route path="/" element={<StartPage />} />

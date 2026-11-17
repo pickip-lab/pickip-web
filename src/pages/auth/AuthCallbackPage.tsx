@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { authSession } from '../../shared/api/authSession'
 import { consumeVerifier } from '../../features/auth/model/pkce'
+import { listConnections } from '../../features/connections/api/connections'
 import { Brand } from '../../shared/ui/Brand'
 import pickipIcon from '../../shared/assets/pickip-icon.png'
 
@@ -21,7 +22,10 @@ export function AuthCallbackPage() {
       return
     }
     authSession.exchange(code, verifier)
-      .then(() => navigate('/inbox', { replace: true }))
+      .then(async () => {
+        const connections = await listConnections().catch(() => null)
+        navigate(connections?.some((connection) => connection.status === 'CONNECTED') ? '/inbox' : '/welcome', { replace: true })
+      })
       .catch(() => setError('로그인을 완료하지 못했습니다. 처음부터 다시 시도해 주세요.'))
   }, [navigate])
 

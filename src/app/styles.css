@@ -28,6 +28,10 @@
 .reading-actions .danger-text { margin-left: auto; }
 .auth-result { text-align: center; max-width: 520px; }
 .profile-card .secondary { margin-top: 30px; }
+.profile-links a { display: block; text-decoration: none; }
+.profile-links a, .profile-links button { border: 0; background: none; text-align: left; padding: 15px 0; font-size: 13px; font-weight: 650; color: #534c59; border-bottom: 1px solid var(--line); }
+.profile-links a:last-child, .profile-links button:last-child { border-bottom: 0; }
+.page-head > .primary { flex: none; }
 * { box-sizing: border-box; }
 html, body { min-height: 100%; margin: 0; }
 body { color: var(--ink); background: var(--canvas); overflow-wrap: anywhere; }
@@ -289,7 +293,7 @@ body.preview-only .preview-switcher { display: none; }
   .bottom-nav .icon { font-size: 20px; line-height: 22px; }
   .main { padding: 26px max(16px, env(safe-area-inset-right)) calc(96px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
   .page-head { display: block; }
-  .page-head > button { margin-top: 15px; }
+  .page-head > button, .page-head > .primary { margin-top: 15px; }
   .connection-grid, .welcome-steps, .preset-grid, .check-list { grid-template-columns: 1fr; }
   .auth-brand-panel { min-height: auto; padding: 28px 24px; }
   .auth-brand-panel h1 { font-size: 38px; margin-top: 40px; }
