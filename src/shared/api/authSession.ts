@@ -4,7 +4,7 @@ type SessionStatus = 'loading' | 'authenticated' | 'anonymous' | 'error'
 type SessionSnapshot = { status: SessionStatus }
 type TokenResponse = { accessToken: string; tokenType: string; accessTokenExpiresAt: string }
 
-class AuthSession {
+export class AuthSession {
   private accessToken: string | null = null
   private snapshot: SessionSnapshot = { status: 'loading' }
   private listeners = new Set<() => void>()
@@ -13,7 +13,7 @@ class AuthSession {
 
   readonly subscribe = (listener: () => void) => {
     this.listeners.add(listener)
-    return () => this.listeners.delete(listener)
+    return () => { this.listeners.delete(listener) }
   }
 
   readonly getSnapshot = () => this.snapshot

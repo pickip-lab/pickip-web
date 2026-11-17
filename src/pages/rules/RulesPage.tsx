@@ -10,7 +10,7 @@ export function RulesPage() {
   const [params, setParams] = useSearchParams()
   const queryClient = useQueryClient()
   const connections = useQuery({ queryKey: ['connections'], queryFn: listConnections })
-  const available = connections.data?.filter((item) => item.status !== 'DISCONNECTED') ?? []
+  const available = connections.data ?? []
   const selected = available.find((item) => String(item.id) === params.get('connectionId')) ?? available[0]
   const rules = useQuery({ queryKey: ['rules', selected?.id], queryFn: () => listRules(selected!.id), enabled: !!selected })
   const [error, setError] = useState('')
@@ -30,7 +30,8 @@ export function RulesPage() {
     <div className="page-head"><div className="copy"><p className="eyebrow">REACTION RULES</p><h1 className="title">수집 규칙</h1><p className="subtitle">정한 이모지를 메시지에 누르면 해당 분류로 저장해요.</p></div>{selected && <Link className="primary" to={`/rules/new?connectionId=${selected.id}`}>＋ 이모지 직접 추가</Link>}</div>
     <RequestState loading={connections.isPending} error={connections.error} retry={() => void connections.refetch()}>
       {!selected ? <div className="card empty-card"><div><h2>먼저 플랫폼을 연결해 주세요</h2><p>연결된 플랫폼별로 이모지 규칙을 만들 수 있어요.</p><Link className="primary" to="/connections">플랫폼 연결하기</Link></div></div> :
-        <div className="rules-layout"><section className="card rules-main"><label className="field-label" htmlFor="rule-connection">적용할 연결</label><select className="select-input" id="rule-connection" value={selected.id} onChange={(event) => { setError(''); setParams({ connectionId: event.target.value }) }}>{available.map((item) => <option value={item.id} key={item.id}>{providers[item.provider].name} · {item.workspaceName}</option>)}</select>
+        <div className="rules-layout"><section className="card rules-main"><label className="field-label" htmlFor="rule-connection">적용할 연결</label><select className="select-input" id="rule-connection" value={selected.id} onChange={(event) => { setError(''); setParams({ connectionId: event.target.value }) }}>{available.map((item) => <option value={item.id} key={item.id}>{providers[item.provider].name} · {item.workspaceName}{item.status === 'DISCONNECTED' ? ' (해제됨)' : ''}</option>)}</select>
+          {selected.status === 'DISCONNECTED' && <p className="field-help">연결이 해제된 공간이에요. 규칙은 유지되지만 새 메시지는 수집되지 않습니다.</p>}
           {error && <p className="form-error" role="alert">{error}</p>}
           <RequestState loading={rules.isPending} error={rules.error} retry={() => void rules.refetch()}><div className="rules-intro"><h2>추천 규칙</h2><span className="small muted">이모지별 규칙을 추가하거나 삭제할 수 있어요</span></div><div className="preset-grid">{categories.map((category) => {
             const emoji = presetEmoji(selected.provider, category)

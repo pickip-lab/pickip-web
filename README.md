@@ -24,4 +24,4 @@ src/
 
 기능이 생기면 `src/features/<기능명>` 안에 해당 기능의 API, 상태, 화면 조각을 함께 둡니다. 아직 없는 기능의 빈 디렉터리는 만들지 않습니다. 페이지는 필요한 feature를 조합하고, feature는 다른 feature의 내부 파일을 직접 가져오지 않습니다.
 
-디자인 원본은 `pickip-design`에 있습니다. 로그인·플랫폼 연결·수집 규칙·보관함은 백엔드 API에 연결되어 있습니다. 로컬 로그인은 백엔드의 `WEB_ORIGIN=http://localhost:5173`, `WEB_REDIRECT_URI=http://localhost:5173/auth/callback`, `PLATFORM_WEB_REDIRECT_URI=http://localhost:5173/connections/callback` 설정을 사용합니다. 카카오 개발자 콘솔에 백엔드의 OAuth 콜백 주소를 등록하고, Slack 등 플랫폼 개발자 콘솔에는 서버의 연결 콜백 주소를 등록해야 합니다. 로그인 후 액세스 토큰은 메모리에만 보관하며, 새로고침 시 HttpOnly 쿠키로 세션을 복구합니다. 실제 OAuth 연결에는 각 제공자의 유효한 앱 자격 증명과 공개 HTTPS 서버 콜백 주소가 필요합니다.
+디자인 원본은 `pickip-design`에 있습니다. 로그인·플랫폼 연결·수집 규칙·보관함은 백엔드 API에 연결되어 있습니다. 인증과 연결 설정은 [docs/integration.md](docs/integration.md)에서 관리합니다.
