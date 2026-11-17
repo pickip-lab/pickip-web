@@ -34,10 +34,13 @@ export function ConnectionsPage() {
           const info = providers[provider]
           const items = connections.data?.filter((item) => item.provider === provider) ?? []
           const active = items.filter((item) => item.status !== 'DISCONNECTED')
+          const connected = active.filter((item) => item.status === 'CONNECTED')
+          const needsAttention = active.some((item) => item.status === 'ERROR')
+          const action = connected.length > 0 ? `${info.name} 공간 추가 연결` : needsAttention ? `${info.name} 다시 연결하기` : `${info.name} 연결하기`
           return <article className="card connection-card" key={provider}>
-            <div className="connection-top"><span className="platform-icon">{info.initial}</span>{active.length > 0 && <span className="status">{active.length}개 연결</span>}</div>
+            <div className="connection-top"><span className="platform-icon">{info.initial}</span>{items.length > 0 && <span className={`status ${needsAttention ? 'error' : ''}`}>{needsAttention ? '확인 필요' : connected.length > 0 ? `${connected.length}개 연결` : '연결 해제됨'}</span>}</div>
             <h2>{info.name}</h2><p>{active.length ? active.map((item) => item.workspaceName).join(', ') : info.description}</p>
-            <button className="secondary" type="button" disabled={busy !== null} onClick={() => void connect(provider)}>{busy === provider ? '이동 중…' : `${info.name} 연결하기`}</button>
+            <button className="secondary" type="button" disabled={busy !== null} onClick={() => void connect(provider)}>{busy === provider ? '이동 중…' : action}</button>
             {items.length > 0 && <div className="connection-links">{items.map((item) => <button key={item.id} type="button" onClick={() => navigate(`/connections/${item.id}`)}>{item.workspaceName} <span>{item.status === 'CONNECTED' ? '연결됨' : item.status === 'ERROR' ? '확인 필요' : '해제됨'} ›</span></button>)}</div>}
           </article>
         })}
