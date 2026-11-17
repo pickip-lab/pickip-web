@@ -22,9 +22,11 @@ export function MessageFacts({ message }: { message: CapturedMessage }) {
 
 export function MessageDetail({ message, full = false, onDelete }: { message: CapturedMessage; full?: boolean; onDelete?: () => void }) {
   const permalink = safeExternalUrl(message.permalink)
+  const [headline, ...remainingLines] = message.messageText.trim().split('\n')
+  const body = remainingLines.join('\n').trim()
   return <article className={`card ${full ? 'reading' : 'detail-card'}`}>
     {!full && <div className="detail-card-head">메시지 상세</div>}
-    <div className="detail-card-body"><span className="detail-kicker">{providers[message.provider].name.toUpperCase()} · {message.channelName ? `#${message.channelName}` : message.channelId}</span><h2>{message.messageText.split('\n')[0] || '내용 없는 메시지'}</h2><p className="detail-message">{message.messageText}</p><div className="divider" />
+    <div className="detail-card-body"><span className="detail-kicker">{providers[message.provider].name.toUpperCase()} · {message.channelName ? `#${message.channelName}` : message.channelId}</span><h2>{headline || '내용 없는 메시지'}</h2>{body && <p className="detail-message">{body}</p>}<div className="divider" />
       <div className="detail-section"><div className="section-line"><p className="section-label">분류</p><Link className="text-button" to={`/messages/${message.id}/categories`}>수정</Link></div><CategoryTags message={message} />{message.categoriesCustomized && <p className="small muted">직접 수정한 분류예요.</p>}</div>
       <div className="detail-section"><p className="section-label">출처와 기록</p><MessageFacts message={message} /></div>
       {full && message.captureTriggers.length > 0 && <div className="detail-section"><p className="section-label">수집한 이모지</p><p className="small muted">{message.captureTriggers.map((item) => item.triggerEmoji).filter(Boolean).join(', ')}</p></div>}
