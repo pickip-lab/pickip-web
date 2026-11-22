@@ -13,6 +13,8 @@ npm run dev
 
 `npm run check`로 lint, 화면 테스트, TypeScript 검사와 프로덕션 빌드를 확인합니다. 로컬 API 주소는 `vite.config.ts`에서 `/api`를 `http://localhost:8080`으로 전달합니다. 배포 환경에도 같은 경로의 프록시를 설정해야 합니다.
 
+Google Cloud VM에서는 루트 `Dockerfile`로 정적 파일을 빌드하고 Nginx가 SPA 경로를 제공합니다. 공개 HTTPS와 `/api` 프록시는 `pickip-backend/deploy/gcp`의 Caddy가 담당합니다. 웹 컨테이너 자체는 외부에 포트를 게시하지 않습니다.
+
 ## 구조
 
 ```text
