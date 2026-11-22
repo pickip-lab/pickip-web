@@ -15,11 +15,11 @@ npm run dev
 
 ## 배포
 
-프로덕션 웹은 Vercel의 Git 연동으로 `main`을 배포합니다. PR은 기존 GitHub Actions의 `npm run check`를 통과해야 합니다. `vercel.json`은 SPA 직접 접근을 `index.html`로 보내고 `/api/*`를 Google Cloud VM의 API로 전달합니다. API 응답은 Vercel에 캐시하지 않습니다.
+프로덕션 웹 주소는 `https://pickip-web.vercel.app`입니다. Vercel은 Git 연동으로 `main`의 변경을 자동 배포합니다. PR은 기존 GitHub Actions의 `npm run check`를 통과해야 합니다. `vercel.json`은 SPA 직접 접근을 `index.html`로 보내고 `/api/*`를 Google Cloud VM의 API로 전달합니다. API 응답은 Vercel에 캐시하지 않습니다.
 
 Vercel 프로젝트의 프레임워크는 Vite, 빌드 명령은 `npm run build`, 출력 디렉터리는 `dist`, Node.js는 24입니다. 프런트엔드에 카카오 비밀키를 넣지 않습니다. 백엔드 VM의 `WEB_HOST`는 프로덕션 Vercel 호스트로 설정해야 로그인 복귀 URI와 요청 출처 검증이 일치합니다. PR별 미리보기 주소는 별도 OAuth 허용 목록이 없으므로 실제 로그인 검증에 사용하지 않습니다.
 
-기존 VM 배포를 재현할 때는 루트 `Dockerfile`로 정적 파일을 빌드하고 Nginx가 SPA 경로를 제공합니다. 공개 HTTPS와 `/api` 프록시는 `pickip-backend/deploy/gcp`의 Caddy가 담당합니다.
+루트 `Dockerfile`과 `deploy/nginx.conf`는 이전 VM 웹 배포의 기록입니다. 현재 운영 웹 배포에는 사용하지 않습니다.
 
 ## 구조
 
