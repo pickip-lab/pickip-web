@@ -112,7 +112,7 @@ body.preview-only .preview-switcher { display: none; }
 .side-nav .icon { font-size: 18px; width: 20px; text-align: center; line-height: 1; font-weight: 400; }
 .side-spacer { flex: 1; }
 .side-quote { border-top: 1px solid #393640; margin: 0 12px 17px; padding-top: 19px; font-size: 12px; color: #9d98a5; line-height: 1.6; }
-.profile-trigger { display: flex; align-items: center; gap: 10px; border: 0; background: none; color: white; width: 100%; text-align: left; padding: 11px 12px; border-radius: 10px; }
+.profile-trigger { display: flex; align-items: center; gap: 10px; border: 0; background: none; color: white; width: 100%; text-align: left; padding: 11px 12px; border-radius: 10px; text-decoration: none; }
 .profile-trigger:hover { background: #282630; }
 .avatar { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: #ded2ed; color: #4e3d61; font-size: 11px; font-weight: 760; flex: none; }
 .profile-trigger strong { display: block; font-size: 12px; }
